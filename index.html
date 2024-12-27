@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Fun Explorer</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
@@ -372,3 +373,71 @@
     </script>
 </body>
 </html>
+=======
+    <title>Fun Explorer - Clicker Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Fun Explorer Clicker Game</h1>
+
+    <!-- Menu with buttons to switch between sections -->
+    <div class="menu">
+        <button onclick="showSection('home')">Home</button>
+        <button onclick="showSection('diamond')">Diamond Clicker</button>
+        <button onclick="showSection('cat')">Cat Clicker</button>
+        <button onclick="showSection('facts')">Cat Facts</button>
+        <button onclick="showSection('random-facts')">Random Facts</button>
+        <button onclick="showSection('weight')">Weight Counter</button>
+    </div>
+
+    <!-- Home Page -->
+    <div id="home" class="section">
+        <h2>Welcome to the Fun Explorer Game!</h2>
+        <p>Select an option from the menu to begin.</p>
+    </div>
+
+    <!-- Diamond Clicker -->
+    <div id="diamond" class="section">
+        <h2>Diamond Clicker</h2>
+        <p>Diamonds: <span id="diamond-count">0</span></p>
+        <button id="diamond-button">Click for Diamonds</button>
+    </div>
+
+    <!-- Cat Clicker -->
+    <div id="cat" class="section">
+        <h2>Cat Clicker</h2>
+        <p>Cats: <span id="cat-count">0</span></p>
+        <button id="cat-button">Click for Cats</button>
+    </div>
+
+    <!-- Cat Facts -->
+    <div id="facts" class="section">
+        <h2>Cat Facts</h2>
+        <button id="cat-facts-button">Show Cat Fact</button>
+        <p id="cat-fact"></p>
+    </div>
+
+    <!-- Random Facts -->
+    <div id="random-facts" class="section">
+        <h2>Random Facts</h2>
+        <button id="facts-button">Show Random Fact</button>
+        <p id="random-fact"></p>
+    </div>
+
+    <!-- Weight Counter -->
+    <div id="weight" class="section">
+        <h2>Weight Counter</h2>
+        <p>Weight: <span id="weight-count">0</span> kg</p>
+        <button id="weight-button">Increase Weight</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made with ❤️</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
+>>>>>>> 84bf5e9 (Initial commit with index, styles, and scripts)
