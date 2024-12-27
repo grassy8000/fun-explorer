@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Explorer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        section {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+            position: relative;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        section button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            background-color: #ff6f61;
+            color: white;
+            border-radius: 30px;
+            margin-top: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section button:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .background-animated {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .random-facts {
+            background: linear-gradient(120deg, #FFDEE9, #B5FFFC);
+        }
+
+        .weight-on-planets {
+            background: linear-gradient(120deg, #F6D365, #FDA085);
+        }
+
+        .cat-facts {
+            background: linear-gradient(120deg, #A18CD1, #FBC2EB);
+        }
+
+        .mine-ores {
+            background: linear-gradient(120deg, #FFC3A0, #FFAFBD);
+        }
+
+        .cat-clicker, .diamond-clicker {
+            background: linear-gradient(120deg, #84FAB0, #8FD3F4);
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -50px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-800px) rotate(360deg);
+            }
+        }
+
+        .bubble:nth-child(1) { left: 10%; animation-duration: 3s; }
+        .bubble:nth-child(2) { left: 20%; animation-duration: 5s; }
+        .bubble:nth-child(3) { left: 30%; animation-duration: 4s; }
+        .bubble:nth-child(4) { left: 50%; animation-duration: 6s; }
+        .bubble:nth-child(5) { left: 70%; animation-duration: 3.5s; }
+        .bubble:nth-child(6) { left: 80%; animation-duration: 5.5s; }
+
+        .output {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+
+        #money {
+            font-size: 1.5em;
+            color: #fffa8b;
+        }
+
+        #upgrade-button {
+            display: none;
+        }
+
+        .clickable-icon {
+            font-size: 80px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .clickable-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .cat-upgrade, .diamond-upgrade {
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: #FFFA8B;
+        }
+
+        .upgrade-container {
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .upgrade-option {
+            background-color: #FF9A9E;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .upgrade-option:hover {
+            background-color: #FF6F61;
+        }
+
+        .fact-text {
+            color: #333;
+            font-size: 1.2em;
+        }
+
+        #cat-facts-container {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Random Facts Section -->
+    <section id="random-facts" class="random-facts">
+        <div class="background-animated">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        <h2>Random Fact Generator</h2>
+        <button onclick="showRandomFact()">Get a Random Fact</button>
+        <p id="fact" class="output fact-text"></p>
+    </section>
+
+    <!-- Weight on Other Planets Section -->
+    <section id="weight-on-planets" class="weight-on-planets">
+        <div class="background-animated">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        <h2>What's Your Weight on Other Planets?</h2>
+        <input type="number" id="weight-input" placeholder="Enter your weight (kg)">
+        <button onclick="calculateWeight()">Calculate</button>
+        <p id="planet-output" class="output"></p>
+    </section>
+
+    <!-- Cat Facts Section -->
+    <section id="cat-facts" class="cat-facts">
+        <div class="background-animated">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        <h2>Cat Facts</h2>
+        <button onclick="addCatFact()">Add Cat Fact</button>
+        <div id="cat-facts-container"></div>
+    </section>
+
+    <!-- Cat Clicker Section -->
+    <section id="cat-clicker" class="cat-clicker">
+        <h2>Cat Clicker Game</h2>
+        <p>Click on the cat to earn money!</p>
+        
+        <div id="cat-container">
+            <div class="clickable-icon" onclick="clickCat()">🐱</div>
+        </div>
+
+        <p>Total Money: $<span id="money">0</span></p>
+        <p>Money per Click: $<span id="money-per-click">1</span></p>
+        
+        <button onclick="showCatUpgrades()">Upgrade</button>
+
+        <div id="cat-upgrade-container" class="upgrade-container">
+            <h3>Upgrades</h3>
+            <div class="upgrade-option" onclick="buyCatUpgrade('money-per-click')">Increase Money per Click ($50)</div>
+            <div class="upgrade-option" onclick="buyCatUpgrade('cat-click-speed')">Increase Click Speed ($100)</div>
+        </div>
+
+        <p>Upgrades Purchased: <span id="cat-upgrades"></span></p>
+    </section>
+
+    <!-- Diamond Clicker Section -->
+    <section id="diamond-clicker" class="diamond-clicker">
+        <h2>Diamond Clicker Game</h2>
+        <p>Click on the diamond to mine!</p>
+
+        <div id="diamond-container">
+            <div class="clickable-icon" onclick="clickDiamond()">💎</div>
+        </div>
+
+        <p>Total Diamonds: $<span id="diamonds">0</span></p>
+        <p>Diamonds per Click: $<span id="diamonds-per-click">1</span></p>
+        
+        <button onclick="showDiamondUpgrades()">Upgrade</button>
+
+        <div id="diamond-upgrade-container" class="upgrade-container">
+            <h3>Upgrades</h3>
+            <div class="upgrade-option" onclick="buyDiamondUpgrade('diamonds-per-click')">Increase Diamonds per Click ($50)</div>
+            <div class="upgrade-option" onclick="buyDiamondUpgrade('mining-speed')">Increase Mining Speed ($100)</div>
+        </div>
+
+        <p>Upgrades Purchased: <span id="diamond-upgrades"></span></p>
+    </section>
+
+    <script>
+        // Random Fact Generator
+        const randomFacts = [
+            "Honey never spoils.",
+            "Octopuses have three hearts.",
+            "Bananas are berries, but strawberries aren't.",
+            "A group of flamingos is called a flamboyance."
+        ];
+
+        function showRandomFact() {
+            const randomIndex = Math.floor(Math.random() * randomFacts.length);
+            document.getElementById("fact").textContent = randomFacts[randomIndex];
+        }
+
+        // Weight on Planets
+        const planets = { Mercury: 0.38, Venus: 0.91, Earth: 1, Mars: 0.38, Jupiter: 2.34 };
+        function calculateWeight() {
+            const weight = parseFloat(document.getElementById("weight-input").value);
+            const output = document.getElementById("planet-output");
+            if (isNaN(weight)) {
+                output.textContent = "Please enter a valid number.";
+            } else {
+                output.textContent = Object.entries(planets).map(([p, g]) => `${p}: ${(weight * g).toFixed(1)} kg`).join(", ");
+            }
+        }
+
+        // Cat Facts
+        const catFacts = ["Cats sleep a lot.", "Cats purr for self-healing.", "Cats can jump six times their height."];
+        function addCatFact() {
+            const factIndex = Math.floor(Math.random() * catFacts.length);
+            const factDiv = document.createElement("div");
+            factDiv.textContent = catFacts[factIndex];
+            document.getElementById("cat-facts-container").appendChild(factDiv);
+        }
+
+        // Cat Clicker Game
+        let money = 0;
+        let moneyPerClick = 1;
+        let upgrades = {
+            "money-per-click": { price: 50, bought: false },
+            "cat-click-speed": { price: 100, bought: false }
+        };
+
+        function clickCat() {
+            money += moneyPerClick;
+            document.getElementById("money").textContent = money;
+        }
+
+        function showCatUpgrades() {
+            const upgradeContainer = document.getElementById("cat-upgrade-container");
+            upgradeContainer.style.display = "block";
+        }
+
+        function buyCatUpgrade(upgrade) {
+            if (money >= upgrades[upgrade].price && !upgrades[upgrade].bought) {
+                money -= upgrades[upgrade].price;
+                upgrades[upgrade].bought = true;
+
+                if (upgrade === "money-per-click") {
+                    moneyPerClick += 1;
+                    document.getElementById("money-per-click").textContent = moneyPerClick;
+                } else if (upgrade === "cat-click-speed") {
+                    // Speed upgrade effect can be implemented here (like faster clicking).
+                }
+
+                document.getElementById("money").textContent = money;
+                updateUpgradeDisplay("cat-upgrades", upgrades);
+                updateUpgradePrices("cat");
+            }
+        }
+
+        function updateUpgradeDisplay(upgradeId, upgrades) {
+            const upgradesPurchased = [];
+            for (let upgrade in upgrades) {
+                if (upgrades[upgrade].bought) {
+                    upgradesPurchased.push(upgrade);
+                }
+            }
+            document.getElementById(upgradeId).textContent = upgradesPurchased.join(", ");
+        }
+
+        function updateUpgradePrices(game) {
+            for (let upgrade in upgrades) {
+                if (upgrades[upgrade].bought) {
+                    upgrades[upgrade].price += 50; // Increase price after each purchase.
+                }
+            }
+        }
+
+        // Diamond Clicker Game
+        let diamonds = 0;
+        let diamondsPerClick = 1;
+        let diamondUpgrades = {
+            "diamonds-per-click": { price: 50, bought: false },
+            "mining-speed": { price: 100, bought: false }
+        };
+
+        function clickDiamond() {
+            diamonds += diamondsPerClick;
+            document.getElementById("diamonds").textContent = diamonds;
+        }
+
+        function showDiamondUpgrades() {
+            const upgradeContainer = document.getElementById("diamond-upgrade-container");
+            upgradeContainer.style.display = "block";
+        }
+
+        function buyDiamondUpgrade(upgrade) {
+            if (diamonds >= diamondUpgrades[upgrade].price && !diamondUpgrades[upgrade].bought) {
+                diamonds -= diamondUpgrades[upgrade].price;
+                diamondUpgrades[upgrade].bought = true;
+
+                if (upgrade === "diamonds-per-click") {
+                    diamondsPerClick += 1;
+                    document.getElementById("diamonds-per-click").textContent = diamondsPerClick;
+                } else if (upgrade === "mining-speed") {
+                    // Speed upgrade effect can be implemented here (like faster mining).
+                }
+
+                document.getElementById("diamonds").textContent = diamonds;
+                updateUpgradeDisplay("diamond-upgrades", diamondUpgrades);
+                updateUpgradePrices("diamond");
+            }
+        }
+    </script>
+</body>
+</html>
