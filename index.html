@@ -4,22 +4,368 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fun Explorer</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            height: 100%;
+            overflow-x: hidden;
+            background: #f0f4f8;
+            position: relative;
+        }
+
+        /* Main Menu */
+        #main-menu {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: #f0f4f8;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        #main-menu h1 {
+            font-size: 3em;
+            margin-bottom: 40px;
+        }
+
+        .menu-button {
+            padding: 20px 50px;
+            margin: 15px;
+            font-size: 1.5em;
+            cursor: pointer;
+            border: none;
+            background-color: #ff6f61;
+            color: white;
+            border-radius: 30px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Sections */
+        section {
+            height: 100vh;
+            padding: 60px 20px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        section button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            background-color: #ff6f61;
+            color: white;
+            border-radius: 30px;
+            margin-top: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Bubble Animation */
+        .bubble {
+            position: absolute;
+            bottom: -50px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-800px) rotate(360deg);
+            }
+        }
+
+        .bubble:nth-child(1) { left: 10%; animation-duration: 3s; }
+        .bubble:nth-child(2) { left: 20%; animation-duration: 5s; }
+        .bubble:nth-child(3) { left: 30%; animation-duration: 4s; }
+        .bubble:nth-child(4) { left: 50%; animation-duration: 6s; }
+        .bubble:nth-child(5) { left: 70%; animation-duration: 3.5s; }
+        .bubble:nth-child(6) { left: 80%; animation-duration: 5.5s; }
+
+        /* Additional Section Styling */
+        #random-facts, #weight-on-planets, #cat-clicker, #diamond-clicker {
+            background: #4d4d4d;
+            position: relative;
+            color: #fff;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
-    <header>
+
+    <!-- Main Menu -->
+    <div id="main-menu">
         <h1>Fun Explorer</h1>
-        <p>Welcome to Fun Explorer! Choose a game or fun section below:</p>
-    </header>
-    <main>
-        <div class="button-container">
-            <button onclick="location.href='diamond-clicker.html'">Diamond Clicker</button>
-            <button onclick="location.href='cat-clicker.html'">Cat Clicker</button>
-            <button onclick="location.href='random-facts.html'">Random Facts</button>
+        <button class="menu-button" onclick="scrollToSection('random-facts')">Random Facts</button>
+        <button class="menu-button" onclick="scrollToSection('weight-on-planets')">Weight on Planets</button>
+        <button class="menu-button" onclick="scrollToSection('cat-clicker')">Cat Clicker</button>
+        <button class="menu-button" onclick="scrollToSection('diamond-clicker')">Diamond Clicker</button>
+    </div>
+
+    <!-- Random Facts Section -->
+    <section id="random-facts">
+        <div class="background-animated">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
         </div>
-    </main>
-    <footer>
-        <p>Made with ❤️</p>
-    </footer>
+        <h2>Random Fact Generator</h2>
+        <button onclick="showRandomFact()">Get a Random Fact</button>
+        <p id="fact" class="output"></p>
+    </section>
+
+    <!-- Weight on Other Planets Section -->
+    <section id="weight-on-planets">
+        <div class="background-animated">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        <h2>What's Your Weight on Other Planets?</h2>
+        <input type="number" id="weight-input" placeholder="Enter your weight (kg)">
+        <button onclick="calculateWeight()">Calculate</button>
+        <p id="planet-output" class="output"></p>
+    </section>
+
+    <!-- Cat Clicker Section -->
+    <section id="cat-clicker">
+        <div class="background-animated">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        <h2>Cat Clicker Game</h2>
+        <p>Click on the cat to earn money!</p>
+        <div id="cat-container">
+            <div class="clickable-icon" onclick="clickCat()">🐱</div>
+        </div>
+
+        <p>Total Money: $<span id="money">0</span></p>
+        <p>Money per Click: $<span id="money-per-click">1</span></p>
+
+        <button onclick="showCatUpgrades()">Upgrade</button>
+
+        <div id="cat-upgrade-container" class="upgrade-container" style="display:none;">
+            <h3>Upgrades</h3>
+            <div class="upgrade-option" onclick="buyCatUpgrade('money-per-click')">Increase Money per Click ($50)</div>
+            <div class="upgrade-option" onclick="buyCatUpgrade('cat-click-speed')">Increase Click Speed ($100)</div>
+        </div>
+
+        <p>Upgrades Purchased: <span id="cat-upgrades"></span></p>
+    </section>
+
+    <!-- Diamond Clicker Section -->
+    <section id="diamond-clicker">
+        <div class="background-animated">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        <h2>Diamond Clicker Game</h2>
+        <p>Click on the diamond to mine!</p>
+        <div id="diamond-container">
+            <div class="clickable-icon" onclick="clickDiamond()">💎</div>
+        </div>
+
+        <p>Total Diamonds: $<span id="diamonds">0</span></p>
+        <p>Diamonds per Click: $<span id="diamonds-per-click">1</span></p>
+
+        <button onclick="showDiamondUpgrades()">Upgrade</button>
+
+        <div id="diamond-upgrade-container" class="upgrade-container" style="display:none;">
+            <h3>Upgrades</h3>
+            <div class="upgrade-option" onclick="buyDiamondUpgrade('diamonds-per-click')">Increase Diamonds per Click ($50)</div>
+            <div class="upgrade-option" onclick="buyDiamondUpgrade('mining-speed')">Increase Mining Speed ($100)</div>
+        </div>
+
+        <p>Upgrades Purchased: <span id="diamond-upgrades"></span></p>
+    </section>
+
+    <!-- Scripts for each functionality -->
+
+    <!-- Main Menu Script -->
+    <script>
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+
+    <!-- Random Facts Script -->
+    <script>
+        const randomFacts = [
+            "Honey never spoils.",
+            "Octopuses have three hearts.",
+            "Bananas are berries, but strawberries aren't.",
+            "A group of flamingos is called a flamboyance."
+        ];
+
+        function showRandomFact() {
+            const randomIndex = Math.floor(Math.random() * randomFacts.length);
+            document.getElementById("fact").textContent = randomFacts[randomIndex];
+        }
+    </script>
+
+    <!-- Weight on Planets Script -->
+    <script>
+        const planets = { Mercury: 0.38, Venus: 0.91, Earth: 1, Mars: 0.38, Jupiter: 2.34 };
+
+        function calculateWeight() {
+            const weight = parseFloat(document.getElementById("weight-input").value);
+            const output = document.getElementById("planet-output");
+            if (isNaN(weight)) {
+                output.textContent = "Please enter a valid number.";
+            } else {
+                output.textContent = Object.entries(planets).map(([p, g]) => `${p}: ${(weight * g).toFixed(1)} kg`).join(", ");
+            }
+        }
+    </script>
+
+    <!-- Cat Clicker Script -->
+    <script>
+        let money = 0;
+        let moneyPerClick = 1;
+        let upgrades = {
+            "money-per-click": { price: 50, bought: false },
+            "cat-click-speed": { price: 100, bought: false }
+        };
+
+        function clickCat() {
+            money += moneyPerClick;
+            document.getElementById("money").textContent = money;
+        }
+
+        function showCatUpgrades() {
+            const upgradeContainer = document.getElementById("cat-upgrade-container");
+            upgradeContainer.style.display = "block";
+        }
+
+        function buyCatUpgrade(upgrade) {
+            if (money >= upgrades[upgrade].price && !upgrades[upgrade].bought) {
+                money -= upgrades[upgrade].price;
+                upgrades[upgrade].bought = true;
+
+                if (upgrade === "money-per-click") {
+                    moneyPerClick += 1;
+                    document.getElementById("money-per-click").textContent = moneyPerClick;
+                }
+
+                document.getElementById("money").textContent = money;
+                updateUpgradeDisplay("cat-upgrades", upgrades);
+                updateUpgradePrices("cat");
+            }
+        }
+
+        function updateUpgradeDisplay(upgradeId, upgrades) {
+            const upgradesPurchased = [];
+            for (let upgrade in upgrades) {
+                if (upgrades[upgrade].bought) {
+                    upgradesPurchased.push(upgrade);
+                }
+            }
+            document.getElementById(upgradeId).textContent = upgradesPurchased.join(", ");
+        }
+
+        function updateUpgradePrices(game) {
+            for (let upgrade in upgrades) {
+                if (upgrades[upgrade].bought) {
+                    upgrades[upgrade].price += 50; // Increase price after each purchase.
+                }
+            }
+        }
+    </script>
+
+    <!-- Diamond Clicker Script -->
+    <script>
+        let diamonds = 0;
+        let diamondsPerClick = 1;
+        let diamondUpgrades = {
+            "diamonds-per-click": { price: 50, bought: false },
+            "mining-speed": { price: 100, bought: false }
+        };
+
+        function clickDiamond() {
+            diamonds += diamondsPerClick;
+            document.getElementById("diamonds").textContent = diamonds;
+        }
+
+        function showDiamondUpgrades() {
+            const upgradeContainer = document.getElementById("diamond-upgrade-container");
+            upgradeContainer.style.display = "block";
+        }
+
+        function buyDiamondUpgrade(upgrade) {
+            if (diamonds >= diamondUpgrades[upgrade].price && !diamondUpgrades[upgrade].bought) {
+                diamonds -= diamondUpgrades[upgrade].price;
+                diamondUpgrades[upgrade].bought = true;
+
+                if (upgrade === "diamonds-per-click") {
+                    diamondsPerClick += 1;
+                    document.getElementById("diamonds-per-click").textContent = diamondsPerClick;
+                }
+
+                document.getElementById("diamonds").textContent = diamonds;
+                updateUpgradeDisplay("diamond-upgrades", diamondUpgrades);
+                updateUpgradePrices("diamond");
+            }
+        }
+
+        function updateUpgradeDisplay(upgradeId, upgrades) {
+            const upgradesPurchased = [];
+            for (let upgrade in upgrades) {
+                if (upgrades[upgrade].bought) {
+                    upgradesPurchased.push(upgrade);
+                }
+            }
+            document.getElementById(upgradeId).textContent = upgradesPurchased.join(", ");
+        }
+
+        function updateUpgradePrices(game) {
+            for (let upgrade in diamondUpgrades) {
+                if (diamondUpgrades[upgrade].bought) {
+                    diamondUpgrades[upgrade].price += 50; // Increase price after each purchase.
+                }
+            }
+        }
+    </script>
+
 </body>
 </html>
