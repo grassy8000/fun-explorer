@@ -9,18 +9,14 @@
 <body>
     <header>
         <h1>Cat Clicker</h1>
+        <button onclick="location.href='index.html'">Back to Home</button>
     </header>
-
-    <section class="game-content">
-        <h2>Click to collect cats!</h2>
-        <button onclick="alert('You clicked!')">Click Me</button>
-        <button onclick="window.location.href='index.html'">Back to Main Menu</button>
-    </section>
-
-    <footer>
-        <p>Made with ❤️</p>
-    </footer>
-
+    <main>
+        <div id="cat-game">
+            <p>Cats: <span id="cat-count">0</span></p>
+            <button id="click-cat">Click for Cats</button>
+        </div>
+    </main>
     <script src="scripts.js"></script>
 </body>
 </html>

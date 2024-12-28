@@ -9,19 +9,14 @@
 <body>
     <header>
         <h1>Random Facts</h1>
+        <button onclick="location.href='index.html'">Back to Home</button>
     </header>
-
-    <section class="game-content">
-        <h2>Did You Know?</h2>
-        <p id="randomFact">Click the button to see a random fact!</p>
-        <button onclick="showRandomFact()">Get Random Fact</button>
-        <button onclick="window.location.href='index.html'">Back to Main Menu</button>
-    </section>
-
-    <footer>
-        <p>Made with ❤️</p>
-    </footer>
-
+    <main>
+        <div id="facts-container">
+            <p id="fact">Click the button to see a random fact!</p>
+            <button id="new-fact">Get New Fact</button>
+        </div>
+    </main>
     <script src="scripts.js"></script>
 </body>
 </html>

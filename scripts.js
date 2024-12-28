@@ -1,24 +1,26 @@
-// Example of Random Facts
+// Diamond Clicker Logic
+let diamonds = 0;
+document.getElementById('click-diamond')?.addEventListener('click', () => {
+    diamonds++;
+    document.getElementById('diamond-count').textContent = diamonds;
+});
+
+// Cat Clicker Logic
+let cats = 0;
+document.getElementById('click-cat')?.addEventListener('click', () => {
+    cats++;
+    document.getElementById('cat-count').textContent = cats;
+});
+
+// Random Facts Logic
 const facts = [
-    "Honey never spoils. Archaeologists have found pots of honey in ancient tombs that are over 3,000 years old and still edible.",
-    "Bananas are berries, but strawberries are not.",
-    "The Eiffel Tower can be 15 cm taller during the summer due to the expansion of iron in the heat.",
-    "Octopuses have three hearts.",
-    "A group of flamingos is called a 'flamboyance'.",
-    "There are more stars in the universe than grains of sand on all of Earth's beaches.",
-    "Sharks have been around longer than trees.",
-    "Wombat poop is cube-shaped."
+    "Cats have five toes on their front paws, but only four toes on their back paws.",
+    "Diamonds are formed under intense pressure and heat.",
+    "Bananas are berries, but strawberries aren't.",
+    "Honey never spoils—it has an eternal shelf life."
 ];
 
-// Function to display a random fact
-function showRandomFact() {
-    const factElement = document.getElementById("randomFact");
+document.getElementById('new-fact')?.addEventListener('click', () => {
     const randomFact = facts[Math.floor(Math.random() * facts.length)];
-    factElement.textContent = randomFact;
-}
-
-// Example: Alert on page load
-window.onload = function() {
-    console.log('Welcome to Fun Explorer!');
-    alert('Welcome to Fun Explorer! Enjoy the games!');
-};
+    document.getElementById('fact').textContent = randomFact;
+});

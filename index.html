@@ -8,22 +8,18 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to Fun Explorer!</h1>
-        <p>Explore various fun activities and games.</p>
+        <h1>Fun Explorer</h1>
+        <p>Welcome to Fun Explorer! Choose a game or fun section below:</p>
     </header>
-
-    <section class="game-list">
-        <h2>Choose a Game to Play:</h2>
-        <button onclick="window.location.href='cat-facts.html'">Cat Facts</button>
-        <button onclick="window.location.href='cat-clicker.html'">Cat Clicker</button>
-        <button onclick="window.location.href='diamond-clicker.html'">Diamond Clicker</button>
-        <button onclick="window.location.href='random-facts.html'">Random Facts</button> <!-- New button -->
-    </section>
-
+    <main>
+        <div class="button-container">
+            <button onclick="location.href='diamond-clicker.html'">Diamond Clicker</button>
+            <button onclick="location.href='cat-clicker.html'">Cat Clicker</button>
+            <button onclick="location.href='random-facts.html'">Random Facts</button>
+        </div>
+    </main>
     <footer>
         <p>Made with ❤️</p>
     </footer>
-
-    <script src="scripts.js"></script>
 </body>
 </html>

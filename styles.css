@@ -1,54 +1,29 @@
-/* General Styles */
 body {
     font-family: Arial, sans-serif;
+    text-align: center;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
-    color: #333;
 }
 
 header {
     background-color: #4CAF50;
     color: white;
     padding: 20px;
-    text-align: center;
 }
 
 footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.game-list {
-    text-align: center;
-    margin-top: 40px;
+    margin-top: 20px;
+    font-size: 14px;
+    color: gray;
 }
 
 button {
-    background-color: #008CBA;
-    color: white;
-    padding: 15px 32px;
     margin: 10px;
-    border: none;
-    border-radius: 4px;
-    font-size: 18px;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #005f73;
-}
-
-/* Media Query for Mobile */
-@media (max-width: 600px) {
-    button {
-        width: 100%;
-        margin: 5px 0;
-    }
+.button-container {
+    margin-top: 50px;
 }
